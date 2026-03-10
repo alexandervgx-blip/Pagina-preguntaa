@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Una pregunta para ti</title>
+
+<style>
+
+body{
+    font-family:'Segoe UI', Arial;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3);
+    height:100vh;
+    margin:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.contenedor{
+    background:white;
+    padding:60px;
+    border-radius:20px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.2);
+    text-align:center;
+}
+
+h1{
+    font-size:35px;
+}
+
+button{
+    padding:12px 35px;
+    font-size:18px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    margin:10px;
+    transition:0.3s;
+}
+
+#si{
+    background:#28a745;
+    color:white;
+}
+
+#si:hover{
+    transform:scale(1.1);
+}
+
+#no{
+    background:#dc3545;
+    color:white;
+}
+
+.corazon{
+    position:absolute;
+    font-size:25px;
+    animation:flotar 4s linear infinite;
+}
+
+@keyframes flotar{
+    0%{
+        transform:translateY(0);
+        opacity:1;
+    }
+    100%{
+        transform:translateY(-700px);
+        opacity:0;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="contenedor" id="contenedor">
+
+<h1>¿Puedo ser tu novio, Mariarene?</h1>
+
+<button id="si" onclick="aceptar()">Sí 💖</button>
+<button id="no" onclick="rechazar()">No 😢</button>
+
+</div>
+
+<audio id="musica">
+<source src="https://open.spotify.com/intl-es/track/6ZhKrGXRgqhE8r19vkYMtg?si=1b5d97d2d4144e63" type="audio/mpeg">
+</audio>
+
+<script>
+
+let tamañoSi = 18
+let tamañoNo = 18
+
+function rechazar(){
+
+tamañoSi += 8
+tamañoNo -= 2
+
+let si = document.getElementById("si")
+let no = document.getElementById("no")
+
+si.style.fontSize = tamañoSi + "px"
+
+if(tamañoNo < 6){
+tamañoNo = 6
+}
+
+no.style.fontSize = tamañoNo + "px"
+
+no.style.position="absolute"
+no.style.left=Math.random()*80+"%"
+no.style.top=Math.random()*80+"%"
+
+}
+
+function aceptar(){
+
+document.getElementById("musica").play()
+
+document.getElementById("contenedor").innerHTML=`
+
+<h1 style="font-size:45px;color:#ff4d6d;">
+¡Sabía que dirías que sí! ❤️
+</h1>
+
+<h2>
+Muchas gracias por aceptarme.<br>
+Prometo hacerte muy feliz 💕
+</h2>
+
+`
+
+corazones()
+}
+
+function corazones(){
+
+setInterval(()=>{
+
+let corazon=document.createElement("div")
+
+corazon.innerHTML="❤️"
+corazon.classList.add("corazon")
+
+corazon.style.left=Math.random()*100+"%"
+corazon.style.bottom="0"
+
+document.body.appendChild(corazon)
+
+setTimeout(()=>{
+corazon.remove()
+},4000)
+
+},250)
+
+}
+
+</script>
+
+</body>
+</html>
